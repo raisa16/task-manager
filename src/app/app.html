@@ -1,9 +1,21 @@
 <app-header/>
   <main class="main">
     <ul id="users">
+      @for(user of users; track user.id) {
       <li>
-        <app-user/>        
+        <app-user
+          [user]="user"
+          (select)="onSelectUser($event)"
+        />        
       </li>
+    }
     </ul>
+    @if(selectedUserTask) {
+      <app-tasks 
+      [name] = "getSelectedUserTask.name "/>
+    }@else {
+      <p id="fallback">Select a user to see their tasks</p>
+    }
+      
 <router-outlet />
 </main>
